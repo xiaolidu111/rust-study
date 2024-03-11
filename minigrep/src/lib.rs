@@ -18,12 +18,19 @@ pub struct Config {
     pub case_sensitive: bool,
 }
 impl Config {
-    pub fn parse_config(args: &[String]) -> Result<Config, &'static str> {
+    pub fn parse_config(mut args: std::env::Args) -> Result<Config, &'static str> {
         if args.len() < 3 {
             return Err("not enough length!");
         }
-        let query = args[1].clone();
-        let filename = args[2].clone();
+        args.next();
+        let query = match args.next() {
+            Some(v) => v,
+            None => return Err("Didn't get a query string"),
+        };
+        let filename = match args.next() {
+            Some(v) => v,
+            None => return Err("Didn't get a file name"),
+        };
         let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
         Ok(Config {
             query,
@@ -34,22 +41,34 @@ impl Config {
 }
 
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-    let mut result = Vec::new();
+    // let mut result = Vec::new();
 
-    for line in contents.lines() {
-        if line.contains(query) {
-            result.push(line);
-        }
-    }
-    result
+    // for line in contents.lines() {
+    //     if line.contains(query) {
+    //         result.push(line);
+    //     }
+    // }
+    // result
+    contents
+        .lines()
+        .filter(|item| item.contains(query))
+        .collect()
 }
 pub fn search_case_insensitive<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
     let mut result = Vec::new();
     let query = query.to_lowercase();
-    for line in contents.lines() {
-        if line.to_lowercase().contains(&query) {
-            result.push(line);
-        }
+    // for line in contents.lines() {
+    //     if line.to_lowercase().contains(&query) {
+    //         result.push(line);
+    //     }
+    // }
+    // result
+    let result_line: Vec<_> = contents
+        .lines()
+        .filter(|item| item.contains(&query))
+        .collect();
+    for item in result_line {
+        result.push(item);
     }
     result
 }
