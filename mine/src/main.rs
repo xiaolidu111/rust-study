@@ -37,4 +37,7 @@ fn main() {
         Spreadsheetcell::Text(String::from("nihao")),
     ];
     println!("{:#?},{:#?},{:#?}", row[1], row[2], row[0]);
+    for v in &row {
+        println!("{:#?}", v);
+    }
 }

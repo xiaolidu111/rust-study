@@ -12,8 +12,8 @@ enum Message {
     ChangeColor(i32, i32, i32),
 }
 impl Message {
-    fn call(&self) {
-        println!("{:#?}", self);
+    fn call() {
+        println!("{:#?}", Message::Move { x: 11, y: 22 });
     }
 }
 fn main() {
@@ -23,6 +23,6 @@ fn main() {
     route(four);
     route(six);
     let quit = Message::Quit;
-    quit.call();
+    Message::call();
 }
 fn route(ip_kid: ipAddrKid) {}

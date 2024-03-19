@@ -23,14 +23,35 @@
 //     y: U,
 // }
 
-use fanxing::{Summary, Tweet};
+// use fanxing::{Summary, Tweet};
 
+// fn main() {
+//     let tweet = Tweet {
+//         username: String::from("xiaolidu"),
+//         content: String::from("of course, as you probably already know, people"),
+//         reply: false,
+//         retweet: false,
+//     };
+//     println!("{}", tweet.summarize())
+// }
+
+fn largest<T: PartialOrd + Clone>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+    for item in list {
+        if item > &largest {
+            largest = item;
+        }
+    }
+    largest
+}
 fn main() {
-    let tweet = Tweet {
-        username: String::from("xiaolidu"),
-        content: String::from("of course, as you probably already know, people"),
-        reply: false,
-        retweet: false,
-    };
-    println!("{}", tweet.summarize())
+    let number_list = vec![34, 50, 25, 100, 65];
+    let result = largest(&number_list);
+    println!("{}", result);
+    let char_list = vec!['y', 'm', 'a', 'q'];
+    let result = largest(&char_list);
+    println!("The largest char is {}", result);
+    let string_list = vec![String::from("value"), String::from("111")];
+    let result = largest(&string_list);
+    println!("The largest char is {}", result);
 }
