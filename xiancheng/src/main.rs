@@ -5,7 +5,7 @@ use std::{
 };
 
 fn main() {
-    // thread::spawn(|| {
+    // let handle = thread::spawn(|| {
     //     for i in 1..10 {
     //         println!("hi number {} from the spawned thread!", i);
     //         thread::sleep(Duration::from_millis(1));
@@ -17,12 +17,14 @@ fn main() {
     //     println!("hi number {} from the main thread!", i);
     //     thread::sleep(Duration::from_millis(1));
     // }
+
+    // handle.join().unwrap();
     // let v = vec![1, 2, 3];
 
     // let handle = thread::spawn(move || {
     //     println!("Here's a vector: {:?}", v);
     // });
-    // println!("{:?}", v);
+    // // println!("{:?}", v);
 
     // handle.join().unwrap();
     // let (tx, rx) = mpsc::channel();
@@ -51,10 +53,10 @@ fn main() {
     // let tx1 = mpsc::Sender::clone(&tx);
     // thread::spawn(move || {
     //     let vals = vec![
-    //         String::from("hi"),
-    //         String::from("from"),
-    //         String::from("the"),
-    //         String::from("thread"),
+    //         String::from("1：hi"),
+    //         String::from("1：from"),
+    //         String::from("1：the"),
+    //         String::from("1：thread"),
     //     ];
 
     //     for val in vals {
